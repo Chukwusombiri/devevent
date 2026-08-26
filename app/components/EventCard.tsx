@@ -1,13 +1,25 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import posthog from 'posthog-js'
 import { EventItem } from '../lib/types'
 
-
-
 function EventCard(props: EventItem) {
+  const handleEventSelection = () => {
+    if (
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+      process.env.NEXT_PUBLIC_POSTHOG_HOST
+    ) {
+      posthog.capture('featured_event_selected', {
+        event_slug: props.slug,
+      })
+    }
+  }
+
   return (
-    <Link href={'/events/' + props.slug} id='event-card'>
+    <Link href={'/events/' + props.slug} id='event-card' onClick={handleEventSelection}>
       <Image
         src={props.image}
         alt={props.title}
