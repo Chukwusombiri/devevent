@@ -25,9 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={cn("font-sans", inter.variable)}>
-      <body
-        className={`${SchibstedGrotesk.variable} ${MartianMono.variable} min-h-screen antialiased`}
-      >
+      <body className={`${SchibstedGrotesk.variable} ${MartianMono.variable} min-h-screen antialiased`}>
         <NavBar />
         <div className="absolute inset-0 top-0 z-[-1]">
           <LightRays
