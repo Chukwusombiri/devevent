@@ -67,12 +67,12 @@ async function page({ params }: { params: Promise<{ slug: string }> }) {
         audience,
         image,
         mode } = event;
-        
+
     const dateLabel = formatDate(date);
 
     const bookings = 10;
     const similarEvents: EventItem[] = await getSimilarEventsBySlug(slug);
-    
+
 
     return (
         <section id="event">
@@ -114,21 +114,23 @@ async function page({ params }: { params: Promise<{ slug: string }> }) {
                     <div className="signup-card">
                         <h2>Book your spot</h2>
                         <p className="text-sm">{
-                        bookings > 0 
-                        ? `Join ${bookings} people who already booked their spot.` 
-                        : "Become the first to person to book a spot, there's special perks to it."}</p>
+                            bookings > 0
+                                ? `Join ${bookings} people who already booked their spot.`
+                                : "Become the first to person to book a spot, there's special perks to it."}</p>
 
-                        <BookEvent />
+                        <BookEvent eventId={event._id} />
                     </div>
                 </aside>
             </div>
             <div className="w-full flex flex-col gap-4 pt-20">
                 <h2>Similar Events</h2>
-                {
-                    similarEvents.length > 0 && similarEvents.map(((sEvent: EventItem) => {
-                        return <EventCard key={sEvent.slug} {...sEvent} />
-                    }))
-                }
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {
+                        similarEvents.length > 0 && similarEvents.map(((sEvent: EventItem) => {
+                            return <EventCard key={sEvent.slug} {...sEvent} />
+                        }))
+                    }
+                </div>
             </div>
         </section>
     )
