@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import posthog from 'posthog-js'
 import { EventItem } from '../lib/types'
+import { formatDate } from '../lib/utils'
 
 function EventCard(props: EventItem) {
   const handleEventSelection = () => {
@@ -38,7 +38,7 @@ function EventCard(props: EventItem) {
       <div className="datetime">
         <div className="flex gap-2 items-center justify-start">
           <Image src="/icons/calendar.svg" alt='location' width={14} height={14} />
-          <p className=''>{props.date}</p>
+          <p className=''>{formatDate(props.date)}</p>
         </div>
         <div className="flex gap-2 items-center justify-start">
           <Image src="/icons/clock.svg" alt='location' width={14} height={14} />

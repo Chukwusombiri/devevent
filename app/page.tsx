@@ -1,8 +1,17 @@
 import ExploreBtn from "./components/ExploreBtn"
 import EventCard from "./components/EventCard";
-import { events } from "./lib/constants";
+import { EventItem } from "./lib/types";
+import { cacheLife } from "next/cache";
 
-function page() {
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+async function page() {
+  'use cache';
+  cacheLife('hours');
+  
+  const res = await fetch(`${BASE_URL}/api/events`);
+  const { events } = await res.json();
+  
   return (
     <div>
       <h1 className="text-center">One Stop Hub for Dev Events <br /> You Can't Afford To Miss</h1>
@@ -12,7 +21,10 @@ function page() {
         <h3>Featured Events</h3>
         <ul className="events list-none" role="listbox">
           {
-            events.map((it, idx) => <EventCard key={idx} {...it} />)
+            (events && events.length > 0) && events.map((event: EventItem) => <li key={event.slug}>
+              {event.slug}
+              <EventCard {...event} />
+            </li>)
           }
         </ul>
       </div>
