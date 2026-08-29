@@ -25,7 +25,6 @@ const nonEmptyString = {
   required: true,
   trim: true,
   minlength: 1,
-  maxLength: 100
 };
 
 const nonEmptyStringArray = {
