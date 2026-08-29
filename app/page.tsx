@@ -3,6 +3,8 @@ import EventCard from "./components/EventCard";
 import { EventItem } from "./lib/types";
 import { cacheLife, cacheTag } from "next/cache";
 
+export const instant = false;
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 async function page() {
