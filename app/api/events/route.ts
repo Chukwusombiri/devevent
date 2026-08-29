@@ -1,10 +1,8 @@
 import connectToDatabase from '@/app/lib/mongodb';
 import { Event } from '@/database';
-import type { EventDocument } from '@/database/event.model';
-import type { NextApiRequest } from 'next';
 import { NextResponse, NextRequest } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
-import { revalidateTag } from 'next/cache';
+//import { revalidateTag } from 'next/cache';
 
 
 export async function POST(request: NextRequest) {
@@ -43,7 +41,7 @@ export async function POST(request: NextRequest) {
             event.agenda = JSON.parse(form.get('agenda') as string);
 
             const createdEvent = await Event.create(event);
-            revalidateTag('events', {expire: 0})
+            //revalidateTag('events', {expire: 0})
 
             return NextResponse.json({ message: "successful", event: createdEvent }, { status: 201 });
         } catch (err) {

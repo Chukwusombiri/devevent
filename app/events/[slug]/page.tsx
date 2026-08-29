@@ -6,7 +6,7 @@ import { formatDate } from "@/app/lib/utils";
 import Image from "next/image";
 import { redirect, notFound } from "next/navigation"
 
-export const instant = false;
+// export const instant = false;
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
